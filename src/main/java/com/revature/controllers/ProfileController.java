@@ -29,7 +29,11 @@ public class ProfileController {
 		
 		switch(response) {
 			case "1":
-				addProfile();
+				try {
+					addProfile();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
 				break;
 			case "2":
 				//accountMenu(); this will go to the login
@@ -44,7 +48,31 @@ public class ProfileController {
 		}
 	}
 	
-	private void addProfile() {
+	private void addProfile() throws SQLException {
+		Connection conn = ConnectionUtil.getConnection();
+		Statement statement = conn.createStatement();
+		
+		ResultSet result = null;
+		
+		
+		
+		
+		
+		
+		
+		
+		//doing tnis
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		System.out.println("What is your username?");
 		String username = scan.nextLine();
 		System.out.println("What is your first name?");
