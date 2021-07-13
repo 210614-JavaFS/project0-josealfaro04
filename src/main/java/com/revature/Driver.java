@@ -1,14 +1,17 @@
 package com.revature;
 
+import java.security.AccessController;
 import java.util.Scanner;
 
+import com.revature.controllers.AccountController;
 import com.revature.controllers.ProfileController;
 import com.revature.models.Profile;
 
 public class Driver {
 	
 	private static ProfileController profileController = new ProfileController();
-		
+	private static AccountController accountController = new AccountController();
+
 	private static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
@@ -22,6 +25,7 @@ public class Driver {
 		
 		switch(response) {
 			case "1":
+				accountController.accountMenu();
 				profileController.profileMenu();
 				break;
 			case "2":
@@ -35,13 +39,7 @@ public class Driver {
 				break;
 			default:
 				System.out.println("Not a valid input, please try again.");
-				System.out.println("Welcome! \n"
-						+ "What type of level entry are you? \n"
-						+ "1) Customer \n"
-						+ "2) Employee \n"
-						+ "3) Admin \n"
-						+ "4) Quit");
-				response = scan.nextLine();
+				
 		}
 		
 		
