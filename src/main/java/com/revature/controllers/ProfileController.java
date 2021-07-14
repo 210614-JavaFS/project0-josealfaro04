@@ -19,62 +19,25 @@ public class ProfileController {
 	
 	private static Scanner scan = new Scanner(System.in);
 	
-	public void profileMenu() {
-		System.out.println("You were accepted ! \n"
-				+ "1) Finish setting up account \n"
-				+ "2) Returning user. \n"
-				+ "3) return");
-		
-		String response = scan.nextLine();
-		
-		switch(response) {
-			case "1":
-				try {
-					addProfile();
-				}catch(SQLException e){
-					e.printStackTrace();
-				}
-				break;
-			case "2":
-				//accountMenu(); this will go to the login
-				break;
-			case "3":
-				//showOneProfile();
-				break;
-			default:
-				return;
-				
-			
-		}
-	}
 	
-	private void addProfile() throws SQLException {
-		Connection conn = ConnectionUtil.getConnection();
-		Statement statement = conn.createStatement();
-		
-		ResultSet result = null;
-		
-		
-		
-		
-		
-		
-		
-		
-		//doing tnis
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
+//	  public void profileMenu() { System.out.println("You were accepted ! \n" +
+//	  "1) Finish setting up account \n" + "2)  \n" + "3) return");
+//	  
+//	  String response = scan.nextLine();
+//	  
+//	  switch(response) {
+//	  	case "1": 
+//	  		try {
+//	  			a
+//	  		}
+//	 
+	
+	public void addProfile() throws SQLException {
 		System.out.println("What is your username?");
 		String username = scan.nextLine();
+		System.out.print("What is your password?");
+		String password = scan.nextLine();
 		System.out.println("What is your first name?");
 		String firstName = scan.nextLine();
 		System.out.println("What is your last name?");
@@ -92,7 +55,8 @@ public class ProfileController {
 		
 		//System.out.println("Successfully created!");
 		
-		Profile profile = new Profile(username, firstName, lastName, email, address, city, state, zipcode);
+		
+		Profile profile = new Profile(username, password, firstName, lastName, email, address, city, state, zipcode);
 		
 		if(profileService.addProfile(profile)) {
 			System.out.println("Profile was successfully created!");
@@ -100,6 +64,49 @@ public class ProfileController {
 			 System.out.println("Something went wrong, please try again");
 			 //addProfile();
 		}
+	}
+	
+	public void updateProfileInfo() throws SQLException {
+		Connection conn = ConnectionUtil.getConnection();
+		Statement statement = conn.createStatement();
+		ResultSet result = null;
+		
+		String username = "";
+		String password = "";
+		
+		while(true) {
+			System.out.println("Enter your username: \n");
+			username = scan.nextLine();
+			System.out.println("Enter your password: \n");
+			password = scan.nextLine();
+			
+			result = statement.executeQuery("SELECT * FROM account WHERE username ='"+username+"' AND pass_word = '"+password+"';");
+			
+			if(result.next()) {
+				System.out.println("Process Complete, thank you");
+				break;
+			} else {
+				System.out.println("Sorry, there was an error. Try again.");
+				System.out.println("Enter your username: \n");
+				username = scan.nextLine();
+				System.out.println("Enter your password: \n");
+				password = scan.nextLine();
+			}
+		}
+		
+		System.out.println("What is your current email?");
+		String email = scan.nextLine();
+		System.out.println("What is your current address?");
+		String address = scan.nextLine();
+		System.out.println("What is your current city?");
+		String city = scan.nextLine();
+		System.out.println("What is your current state?");
+		String state = scan.nextLine();
+		System.out.println("What is your current zipcode?");
+		String zipcode = scan.nextLine();
+		
+		statement.executeUpdate("UPDATE profile SET email = '"+email+"', address = '"+address+"', city = '"+city+"', state = '"+state+"', zipcode = '"+zipcode+"' WHERE username = '"+username+"';");
+		System.out.println("Update Successful");
 	}
 
 	public void showAllProfiles() {
@@ -125,7 +132,7 @@ public class ProfileController {
 			result = statement.executeQuery("SELECT * FROM profile WHERE username = '"+username+"'");
 			
 			if(result.next()) {
-				System.out.println("Thank you.");
+				System.out.println("Give it a minute please.");
 				break;
 			} else {
 				System.out.println("Sorry that user does not exist. Try again.");

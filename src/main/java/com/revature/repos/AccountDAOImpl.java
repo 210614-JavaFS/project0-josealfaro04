@@ -71,6 +71,8 @@ public class AccountDAOImpl implements AccountDAO {
 				account.setFirstName(result.getString("first_name"));
 				account.setLastName(result.getString("last_name"));
 				account.setBalance(result.getDouble("balance"));
+				account.setAccLevel(result.getInt("acc_level"));
+				account.setDoesExist(result.getBoolean("does_exist"));
 			}
 			
 			return account;
@@ -90,8 +92,8 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override
 	public boolean addAccount(Account account) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "INSERT INTO account (username, pass_word, first_name, last_name, balance)"
-					+ " VALUES (?,?,?,?,?);";
+			String sql = "INSERT INTO account (username, pass_word, first_name, last_name, balance, acc_level, does_exist)"
+					+ " VALUES (?,?,?,?,?,?,?);";
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -101,7 +103,9 @@ public class AccountDAOImpl implements AccountDAO {
 			statement.setString(++index, account.getFirstName());
 			statement.setString(++index, account.getLastName());
 			statement.setDouble(++index, account.getBalance());
-
+			statement.setInt(++index, account.getAccLevel());
+			statement.setBoolean(++index, account.isDoesExist());
+			
 			statement.execute();
 
 			return true;

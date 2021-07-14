@@ -3,6 +3,7 @@ package com.revature.models;
 public class Profile {
 	
 	private String username;
+	private String password;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -10,11 +11,11 @@ public class Profile {
 	private String city;
 	private String state;
 	private String zipcode;
-	
-	public Profile(String username, String firstName, String lastName, String email, String address, String city,
-			String state, String zipcode) {
+	public Profile(String username, String password, String firstName, String lastName, String email, String address,
+			String city, String state, String zipcode) {
 		super();
 		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -23,75 +24,63 @@ public class Profile {
 		this.state = state;
 		this.zipcode = zipcode;
 	}
-
 	public Profile() {
 		super();
 	}
-
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 	public String getCity() {
 		return city;
 	}
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 	public String getState() {
 		return state;
 	}
-
 	public void setState(String state) {
 		this.state = state;
 	}
-
 	public String getZipcode() {
 		return zipcode;
 	}
-
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,12 +90,12 @@ public class Profile {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -141,6 +130,11 @@ public class Profile {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (state == null) {
 			if (other.state != null)
 				return false;
@@ -158,13 +152,12 @@ public class Profile {
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return "Profile [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", address=" + address + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode + "]";
+		return "Profile [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", address=" + address + ", city=" + city + ", state=" + state
+				+ ", zipcode=" + zipcode + "]";
 	}
-	
 	
 	
 	

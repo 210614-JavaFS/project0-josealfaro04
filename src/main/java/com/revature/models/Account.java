@@ -8,16 +8,21 @@ public class Account {
 	private String firstName;
 	private String lastName;
 	private double balance;
+	private int accLevel;
+	private boolean doesExist;
 	
-	public Account(String username, String password, String firstName, String lastName, double balance) {
+	public Account(String username, String password, String firstName, String lastName, double balance, int accLevel,
+			boolean doesExist) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.balance = balance;
+		this.accLevel = accLevel;
+		this.doesExist = doesExist;
 	}
-
+	
 	public Account() {
 		super();
 	}
@@ -70,13 +75,31 @@ public class Account {
 		this.balance = balance;
 	}
 
+	public int getAccLevel() {
+		return accLevel;
+	}
+
+	public void setAccLevel(int accLevel) {
+		this.accLevel = accLevel;
+	}
+
+	public boolean isDoesExist() {
+		return doesExist;
+	}
+
+	public void setDoesExist(boolean doesExist) {
+		this.doesExist = doesExist;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + accLevel;
 		long temp;
 		temp = Double.doubleToLongBits(balance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + (doesExist ? 1231 : 1237);
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -94,7 +117,11 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
+		if (accLevel != other.accLevel)
+			return false;
 		if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
+			return false;
+		if (doesExist != other.doesExist)
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -124,10 +151,9 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", balance=" + balance + "]";
+				+ ", lastName=" + lastName + ", balance=" + balance + ", accLevel=" + accLevel + ", doesExist="
+				+ doesExist + "]";
 	}
-	
-	
-	
+
 	
 }
