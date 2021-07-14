@@ -327,11 +327,6 @@ public class AccountController {
 			
 		}
 		
-		
-		
-		
-		
-		
 	}
 	
 	public void mainMenu(Account account) throws SQLException{
@@ -348,8 +343,8 @@ public class AccountController {
 			boolean accountExist = AccountController.userExists(username, password);
 			int accLevel = AccountController.accountPass(username, password);
 			
+			System.out.println("Credentials were successful!");
 			while(accLevel > 0) {
-				System.out.println("Credentials were successful!");
 				
 				//customer
 				if(accLevel == 1) {

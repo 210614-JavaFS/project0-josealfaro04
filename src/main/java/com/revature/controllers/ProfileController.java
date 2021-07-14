@@ -124,12 +124,13 @@ public class ProfileController {
 		ResultSet result = null;
 		
 		String username = "";
+		String password ="";
 		
 		while(true) {
 			System.out.println("What user profile would you want to see?");
 			username = scan.nextLine();
 			
-			result = statement.executeQuery("SELECT * FROM profile WHERE username = '"+username+"'");
+			result = statement.executeQuery("SELECT * FROM account WHERE username ='"+username+"' AND pass_word = '"+password+"';");
 			
 			if(result.next()) {
 				System.out.println("Give it a minute please.");
