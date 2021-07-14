@@ -96,20 +96,20 @@ public class ProfileDAOImpl implements ProfileDAO {
 
 	@Override
 	public boolean updateProfile(Profile profile) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean addProfile(Profile profile) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "INSERT INTO profile (username, first_name, last_name, email, address, city, state, zipcode)"
-					+ " VALUES (?,?,?,?,?,?,?,?);";
+			String sql = "INSERT INTO profile (username, pass_word, first_name, last_name, email, address, city, state, zipcode)"
+					+ " VALUES (?,?,?,?,?,?,?,?,?);";
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 
 			int index = 0;
 			statement.setString(++index, profile.getUsername());
+			statement.setString(++index, profile.getPassword());
 			statement.setString(++index, profile.getFirstName());
 			statement.setString(++index, profile.getLastName());
 			statement.setString(++index, profile.getEmail());
